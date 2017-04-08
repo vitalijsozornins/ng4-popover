@@ -1,20 +1,16 @@
 {
-  "name": "ngx-popover",
-  "version": "0.0.17",
+  "name": "ng4-popover",
+  "version": "0.0.18",
   "description": "Simple popover control for your angular2 applications using bootstrap3.",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "private": true,
   "author": {
     "name": "Umed Khudoiberdiev",
     "email": "pleerock.me@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pleerock/ngx-popover.git"
-  },
-  "bugs": {
-    "url": "https://github.com/pleerock/ngx-popover/issues"
+    "url": "https://github.com/ctubio/ng4-popover.git"
   },
   "tags": [
     "popover",
