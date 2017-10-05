@@ -54,7 +54,7 @@ import {BrowserModule} from "@angular/platform-browser";
         </button>
     </div>
     
-    <!-- popover show on hover -->
+    <!-- popover with dismiss timeout-->
     <br/>
     <div>
         <button popover="Hello dismissible popover" 
