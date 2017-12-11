@@ -1,8 +1,14 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+exports.__esModule = true;
 var core_1 = require("@angular/core");
 var PopoverContent_1 = require("./PopoverContent");
-var Popover = /** @class */ (function () {
+var Popover = (function () {
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
@@ -23,11 +29,7 @@ var Popover = /** @class */ (function () {
     // -------------------------------------------------------------------------
     // Event listeners
     // -------------------------------------------------------------------------
-    Popover.prototype.showOrHideOnClick = 
-    // -------------------------------------------------------------------------
-    // Event listeners
-    // -------------------------------------------------------------------------
-    function () {
+    Popover.prototype.showOrHideOnClick = function () {
         if (this.popoverOnHover)
             return;
         if (this.popoverDisabled)
@@ -60,14 +62,7 @@ var Popover = /** @class */ (function () {
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
-    // -------------------------------------------------------------------------
-    // Public Methods
-    // -------------------------------------------------------------------------
-    Popover.prototype.toggle = 
-    // -------------------------------------------------------------------------
-    // Public Methods
-    // -------------------------------------------------------------------------
-    function () {
+    Popover.prototype.toggle = function () {
         if (!this.visible) {
             this.show();
         }
@@ -148,37 +143,59 @@ var Popover = /** @class */ (function () {
     Popover.prototype.getElement = function () {
         return this.viewContainerRef.element.nativeElement;
     };
-    Popover.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: "[popover]",
-                    exportAs: "popover"
-                },] },
-    ];
-    /** @nocollapse */
-    Popover.ctorParameters = function () { return [
-        { type: core_1.ViewContainerRef, },
-        { type: core_1.ComponentFactoryResolver, },
-        { type: core_1.ApplicationRef, },
-        { type: core_1.Injector, },
-    ]; };
-    Popover.propDecorators = {
-        "content": [{ type: core_1.Input, args: ["popover",] },],
-        "popoverInBody": [{ type: core_1.Input },],
-        "popoverDisabled": [{ type: core_1.Input },],
-        "popoverAnimation": [{ type: core_1.Input },],
-        "popoverPlacement": [{ type: core_1.Input },],
-        "popoverTitle": [{ type: core_1.Input },],
-        "popoverOnHover": [{ type: core_1.Input },],
-        "popoverCloseOnClickOutside": [{ type: core_1.Input },],
-        "popoverCloseOnMouseOutside": [{ type: core_1.Input },],
-        "popoverDismissTimeout": [{ type: core_1.Input },],
-        "onShown": [{ type: core_1.Output },],
-        "onHidden": [{ type: core_1.Output },],
-        "showOrHideOnClick": [{ type: core_1.HostListener, args: ["click",] },],
-        "showOnHover": [{ type: core_1.HostListener, args: ["focusin",] }, { type: core_1.HostListener, args: ["mouseenter",] },],
-        "hideOnHover": [{ type: core_1.HostListener, args: ["focusout",] }, { type: core_1.HostListener, args: ["mouseleave",] },],
-    };
+    __decorate([
+        core_1.Input("popover")
+    ], Popover.prototype, "content");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverInBody");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverDisabled");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverAnimation");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverPlacement");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverTitle");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverOnHover");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverCloseOnClickOutside");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverCloseOnMouseOutside");
+    __decorate([
+        core_1.Input()
+    ], Popover.prototype, "popoverDismissTimeout");
+    __decorate([
+        core_1.Output()
+    ], Popover.prototype, "onShown");
+    __decorate([
+        core_1.Output()
+    ], Popover.prototype, "onHidden");
+    __decorate([
+        core_1.HostListener("click")
+    ], Popover.prototype, "showOrHideOnClick");
+    __decorate([
+        core_1.HostListener("focusin"),
+        core_1.HostListener("mouseenter")
+    ], Popover.prototype, "showOnHover");
+    __decorate([
+        core_1.HostListener("focusout"),
+        core_1.HostListener("mouseleave")
+    ], Popover.prototype, "hideOnHover");
+    Popover = __decorate([
+        core_1.Directive({
+            selector: "[popover]",
+            exportAs: "popover"
+        })
+    ], Popover);
     return Popover;
 }());
 exports.Popover = Popover;
-//# sourceMappingURL=Popover.js.map

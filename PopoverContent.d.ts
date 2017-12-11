@@ -5,6 +5,7 @@ export declare class PopoverContent implements AfterViewInit, OnDestroy {
     protected cdr: ChangeDetectorRef;
     protected renderer: Renderer;
     content: string;
+    inBody: string;
     placement: "top" | "bottom" | "left" | "right" | "auto" | "auto top" | "auto bottom" | "auto left" | "auto right";
     title: string;
     animation: boolean;
