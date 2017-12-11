@@ -1,4 +1,4 @@
-import { Directive, HostListener, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, Input, OnChanges, SimpleChange, Output, EventEmitter } from "@angular/core";
+import { Directive, HostListener, ComponentRef, EmbeddedViewRef, ViewContainerRef, Injector, ApplicationRef, ComponentFactoryResolver, ComponentFactory, Input, OnChanges, SimpleChange, Output, EventEmitter } from "@angular/core";
 import {PopoverContent} from "./PopoverContent";
 
 @Directive({
@@ -20,7 +20,9 @@ export class Popover implements OnChanges {
     // -------------------------------------------------------------------------
 
     constructor(protected viewContainerRef: ViewContainerRef,
-                protected resolver: ComponentFactoryResolver) {
+                protected resolver: ComponentFactoryResolver,
+                protected applicationRef: ApplicationRef,
+                protected injector: Injector) {
     }
 
     // -------------------------------------------------------------------------
@@ -29,6 +31,9 @@ export class Popover implements OnChanges {
 
     @Input("popover")
     content: string|PopoverContent;
+
+    @Input()
+    popoverInBody: boolean;
 
     @Input()
     popoverDisabled: boolean;
@@ -116,8 +121,11 @@ export class Popover implements OnChanges {
             const factory = this.resolver.resolveComponentFactory(this.PopoverComponent);
             if (!this.visible)
                 return;
-
+            
             this.popover = this.viewContainerRef.createComponent(factory);
+            if(this.popoverInBody){
+                this.popover = factory.create(this.injector);
+            }
             const popover = this.popover.instance as PopoverContent;
             popover.popover = this;
             popover.content = this.content as string;
@@ -152,6 +160,16 @@ export class Popover implements OnChanges {
 
             popover.onCloseFromOutside.subscribe(() => this.hide());
             // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
+            if(this.popoverInBody){
+                this.applicationRef.attachView(this.popover.hostView);
+                    // Get DOM element from component
+               
+                const domElem = (this.popover.hostView as EmbeddedViewRef<any>)
+                .rootNodes[0] as HTMLElement;
+            
+                // Append DOM element to the body
+                document.getElementsByTagName('app')[0].appendChild(domElem);
+            }
             if (this.popoverDismissTimeout > 0)
                 setTimeout(() => this.hide(), this.popoverDismissTimeout);
             popover.show();

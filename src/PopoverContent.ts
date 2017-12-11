@@ -53,6 +53,9 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     content: string;
 
     @Input()
+    inBody: string;
+
+    @Input()
     placement: "top"|"bottom"|"left"|"right"|"auto"|"auto top"|"auto bottom"|"auto left"|"auto right" = "bottom";
 
     @Input()
@@ -233,7 +236,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         let offsetParentBCR = { top: 0, left: 0 };
         const elBCR = this.offset(nativeEl);
         const offsetParentEl = this.parentOffsetEl(nativeEl);
-        if (offsetParentEl !== window.document) {
+        if (offsetParentEl !== window.document && !this.popover.popoverInBody) {
             offsetParentBCR = this.offset(offsetParentEl);
             offsetParentBCR.top += offsetParentEl.clientTop - offsetParentEl.scrollTop;
             offsetParentBCR.left += offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
