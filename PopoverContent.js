@@ -63,7 +63,7 @@ var PopoverContent = (function () {
     // Public Methods
     // -------------------------------------------------------------------------
     PopoverContent.prototype.show = function () {
-        if (!this.popover || !this.popover.getElement())
+        if (!this.popover || !this.popover.getElement() || !this.popover.content)
             return;
         var p = this.positionElements(this.popover.getElement(), this.popoverDiv.nativeElement, this.placement);
         this.displayType = "block";

@@ -137,7 +137,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     // -------------------------------------------------------------------------
 
     show(): void {
-        if (!this.popover || !this.popover.getElement())
+        if (!this.popover || !this.popover.getElement() || !this.popover.content)
             return;
 
         const p = this.positionElements(this.popover.getElement(), this.popoverDiv.nativeElement, this.placement);
