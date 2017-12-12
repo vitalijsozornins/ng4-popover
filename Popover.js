@@ -100,6 +100,14 @@ var Popover = (function () {
             if (this.popoverCloseOnMouseOutside !== undefined)
                 popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
             popover.onCloseFromOutside.subscribe(function () { return _this.hide(); });
+            if (this.popoverInBody) {
+                this.applicationRef.attachView(this.popover.hostView);
+                // Get DOM element from component
+                var domElem = this.popover.hostView
+                    .rootNodes[0];
+                // Append DOM element to the body
+                document.getElementsByTagName('app')[0].appendChild(domElem);
+            }
             // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
             if (this.popoverDismissTimeout > 0)
                 setTimeout(function () { return _this.hide(); }, this.popoverDismissTimeout);
@@ -119,14 +127,6 @@ var Popover = (function () {
                 popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
             popover.onCloseFromOutside.subscribe(function () { return _this.hide(); });
             // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
-            if (this.popoverInBody) {
-                this.applicationRef.attachView(this.popover.hostView);
-                // Get DOM element from component
-                var domElem = this.popover.hostView
-                    .rootNodes[0];
-                // Append DOM element to the body
-                document.getElementsByTagName('app')[0].appendChild(domElem);
-            }
             if (this.popoverDismissTimeout > 0)
                 setTimeout(function () { return _this.hide(); }, this.popoverDismissTimeout);
             popover.show();

@@ -141,6 +141,16 @@ export class Popover implements OnChanges {
                 popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
 
             popover.onCloseFromOutside.subscribe(() => this.hide());
+            if(this.popoverInBody){
+                this.applicationRef.attachView(this.popover.hostView);
+                    // Get DOM element from component
+               
+                const domElem = (this.popover.hostView as EmbeddedViewRef<any>)
+                .rootNodes[0] as HTMLElement;
+            
+                // Append DOM element to the body
+                document.getElementsByTagName('app')[0].appendChild(domElem);
+            }
             // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
             if (this.popoverDismissTimeout > 0)
                 setTimeout(() => this.hide(), this.popoverDismissTimeout);
@@ -160,16 +170,6 @@ export class Popover implements OnChanges {
 
             popover.onCloseFromOutside.subscribe(() => this.hide());
             // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
-            if(this.popoverInBody){
-                this.applicationRef.attachView(this.popover.hostView);
-                    // Get DOM element from component
-               
-                const domElem = (this.popover.hostView as EmbeddedViewRef<any>)
-                .rootNodes[0] as HTMLElement;
-            
-                // Append DOM element to the body
-                document.getElementsByTagName('app')[0].appendChild(domElem);
-            }
             if (this.popoverDismissTimeout > 0)
                 setTimeout(() => this.hide(), this.popoverDismissTimeout);
             popover.show();
