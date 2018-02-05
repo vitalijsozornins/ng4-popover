@@ -131,6 +131,8 @@ export class Popover implements OnChanges {
             popover.content = this.content as string;
             if (this.popoverPlacement !== undefined)
                 popover.placement = this.popoverPlacement;
+            if (this.popoverInBody)
+                popover.popoverInBody = this.popoverInBody;
             if (this.popoverAnimation !== undefined)
                 popover.animation = this.popoverAnimation;
             if (this.popoverTitle !== undefined)
@@ -159,6 +161,8 @@ export class Popover implements OnChanges {
             popover.popover = this;
             if (this.popoverPlacement !== undefined)
                 popover.placement = this.popoverPlacement;
+            if (this.popoverInBody)
+                popover.popoverInBody = this.popoverInBody;
             if (this.popoverAnimation !== undefined)
                 popover.animation = this.popoverAnimation;
             if (this.popoverTitle !== undefined)
