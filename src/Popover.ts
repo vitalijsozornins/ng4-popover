@@ -33,7 +33,7 @@ export class Popover implements OnChanges {
     content: string|PopoverContent;
 
     @Input()
-    popoverInBody: boolean;
+    popoverInBody: boolean= true;
 
     @Input()
     popoverDisabled: boolean;
