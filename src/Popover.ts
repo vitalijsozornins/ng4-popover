@@ -121,9 +121,9 @@ export class Popover implements OnChanges {
             const factory = this.resolver.resolveComponentFactory(this.PopoverComponent);
             if (!this.visible)
                 return;
-            
+
             this.popover = this.viewContainerRef.createComponent(factory);
-            if(this.popoverInBody){
+            if (this.popoverInBody || this.popoverInBody === undefined) {
                 this.popover = factory.create(this.injector);
             }
             const popover = this.popover.instance as PopoverContent;
@@ -131,7 +131,7 @@ export class Popover implements OnChanges {
             popover.content = this.content as string;
             if (this.popoverPlacement !== undefined)
                 popover.placement = this.popoverPlacement;
-            if (this.popoverInBody)
+            if (this.popoverInBody || this.popoverInBody === undefined)
                 popover.popoverInBody = this.popoverInBody;
             if (this.popoverAnimation !== undefined)
                 popover.animation = this.popoverAnimation;
@@ -143,13 +143,13 @@ export class Popover implements OnChanges {
                 popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
 
             popover.onCloseFromOutside.subscribe(() => this.hide());
-            if(this.popoverInBody){
+            if (this.popoverInBody || this.popoverInBody === undefined) {
                 this.applicationRef.attachView(this.popover.hostView);
                     // Get DOM element from component
-               
+
                 const domElem = (this.popover.hostView as EmbeddedViewRef<any>)
                 .rootNodes[0] as HTMLElement;
-            
+
                 // Append DOM element to the body
                 document.getElementsByTagName('app')[0].appendChild(domElem);
             }

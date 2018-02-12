@@ -1,13 +1,8 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var PopoverContent = (function () {
+var Popover_1 = require("./Popover");
+var PopoverContent = /** @class */ (function () {
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
@@ -26,11 +21,11 @@ var PopoverContent = (function () {
         this.isIn = false;
         this.displayType = "none";
         // -------------------------------------------------------------------------
-        // Anonymous 
+        // Anonymous
         // -------------------------------------------------------------------------
         /**
-         * Closes dropdown if user clicks outside of this directive.
-         */
+             * Closes dropdown if user clicks outside of this directive.
+             */
         this.onDocumentMouseDown = function (event) {
             var element = _this.element.nativeElement;
             if (!element || !_this.popover)
@@ -59,8 +54,15 @@ var PopoverContent = (function () {
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
-    PopoverContent.prototype.show = function () {
-        if (!this.popover || !this.popover.getElement())
+    // -------------------------------------------------------------------------
+    // Public Methods
+    // -------------------------------------------------------------------------
+    PopoverContent.prototype.show = 
+    // -------------------------------------------------------------------------
+    // Public Methods
+    // -------------------------------------------------------------------------
+    function () {
+        if (!this.popover || !this.popover.getElement() || !this.popover.content)
             return;
         var p = this.positionElements(this.popover.getElement(), this.popoverDiv.nativeElement, this.placement);
         this.displayType = "block";
@@ -82,7 +84,14 @@ var PopoverContent = (function () {
     // -------------------------------------------------------------------------
     // Protected Methods
     // -------------------------------------------------------------------------
-    PopoverContent.prototype.positionElements = function (hostEl, targetEl, positionStr, appendToBody) {
+    // -------------------------------------------------------------------------
+    // Protected Methods
+    // -------------------------------------------------------------------------
+    PopoverContent.prototype.positionElements = 
+    // -------------------------------------------------------------------------
+    // Protected Methods
+    // -------------------------------------------------------------------------
+    function (hostEl, targetEl, positionStr, appendToBody) {
         if (appendToBody === void 0) { appendToBody = false; }
         var positionStrParts = positionStr.split("-");
         var pos0 = positionStrParts[0];
@@ -170,6 +179,7 @@ var PopoverContent = (function () {
     };
     PopoverContent.prototype.getStyle = function (nativeEl, cssProp) {
         if (nativeEl.currentStyle)
+            // IE
             return nativeEl.currentStyle[cssProp];
         if (window.getComputedStyle)
             return window.getComputedStyle(nativeEl)[cssProp];
@@ -207,37 +217,31 @@ var PopoverContent = (function () {
         }
         return desiredPlacement;
     };
-    __decorate([
-        core_1.Input()
-    ], PopoverContent.prototype, "content");
-    __decorate([
-        core_1.Input()
-    ], PopoverContent.prototype, "inBody");
-    __decorate([
-        core_1.Input()
-    ], PopoverContent.prototype, "placement");
-    __decorate([
-        core_1.Input()
-    ], PopoverContent.prototype, "title");
-    __decorate([
-        core_1.Input()
-    ], PopoverContent.prototype, "animation");
-    __decorate([
-        core_1.Input()
-    ], PopoverContent.prototype, "closeOnClickOutside");
-    __decorate([
-        core_1.Input()
-    ], PopoverContent.prototype, "closeOnMouseOutside");
-    __decorate([
-        core_1.ViewChild("popoverDiv")
-    ], PopoverContent.prototype, "popoverDiv");
-    PopoverContent = __decorate([
-        core_1.Component({
-            selector: "popover-content",
-            template: "\n<div #popoverDiv class=\"popover {{ effectivePlacement }}\"\n     [style.top]=\"top + 'px'\"\n     [style.left]=\"left + 'px'\"\n     [class.in]=\"isIn\"\n     [class.fade]=\"animation\"\n     style=\"display: block\"\n     role=\"popover\">\n    <div [hidden]=\"!closeOnMouseOutside\" class=\"virtual-area\"></div>\n    <div class=\"arrow\"></div> \n    <h3 class=\"popover-title\" [hidden]=\"!title\">{{ title }}</h3>\n    <div class=\"popover-content\">\n        <ng-content></ng-content>\n        <div [innerHtml]=\"content\"></div>\n    </div> \n</div>\n",
-            styles: ["\n.popover .virtual-area {\n    height: 11px;\n    width: 100%;\n    position: absolute;\n}\n.popover.top .virtual-area {\n    bottom: -11px; \n}\n.popover.bottom .virtual-area {\n    top: -11px; \n}\n.popover.left .virtual-area {\n    right: -11px; \n}\n.popover.right .virtual-area {\n    left: -11px; \n}\n"]
-        })
-    ], PopoverContent);
+    PopoverContent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: "popover-content",
+                    template: "\n<div #popoverDiv class=\"popover {{ effectivePlacement }}\"\n     [style.top]=\"top + 'px'\"\n     [style.left]=\"left + 'px'\"\n     [class.in]=\"isIn\"\n     [class.fade]=\"animation\"\n     style=\"display: block\"\n     role=\"popover\">\n    <div [hidden]=\"!closeOnMouseOutside\" class=\"virtual-area\"></div>\n    <div class=\"arrow\"></div>\n    <h3 class=\"popover-title\" [hidden]=\"!title\">{{ title }}</h3>\n    <div class=\"popover-content\">\n        <ng-content></ng-content>\n        <div [innerHtml]=\"content\"></div>\n    </div>\n</div>\n",
+                    styles: ["\n.popover .virtual-area {\n    height: 11px;\n    width: 100%;\n    position: absolute;\n}\n.popover.top .virtual-area {\n    bottom: -11px;\n}\n.popover.bottom .virtual-area {\n    top: -11px;\n}\n.popover.left .virtual-area {\n    right: -11px;\n}\n.popover.right .virtual-area {\n    left: -11px;\n}\n"]
+                },] },
+    ];
+    /** @nocollapse */
+    PopoverContent.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+        { type: core_1.ChangeDetectorRef, },
+        { type: core_1.Renderer, },
+    ]; };
+    PopoverContent.propDecorators = {
+        "content": [{ type: core_1.Input },],
+        "inBody": [{ type: core_1.Input },],
+        "popoverInBody": [{ type: core_1.Input },],
+        "placement": [{ type: core_1.Input },],
+        "title": [{ type: core_1.Input },],
+        "animation": [{ type: core_1.Input },],
+        "closeOnClickOutside": [{ type: core_1.Input },],
+        "closeOnMouseOutside": [{ type: core_1.Input },],
+        "popoverDiv": [{ type: core_1.ViewChild, args: ["popoverDiv",] },],
+    };
     return PopoverContent;
 }());
 exports.PopoverContent = PopoverContent;
+//# sourceMappingURL=PopoverContent.js.map
