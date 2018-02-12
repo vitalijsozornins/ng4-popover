@@ -92,7 +92,7 @@ var PopoverContent = /** @class */ (function () {
     // Protected Methods
     // -------------------------------------------------------------------------
     function (hostEl, targetEl, positionStr, appendToBody) {
-        if (appendToBody === void 0) { appendToBody = false; }
+        if (appendToBody === void 0) { appendToBody = true; }
         var positionStrParts = positionStr.split("-");
         var pos0 = positionStrParts[0];
         var pos1 = positionStrParts[1] || "center";
