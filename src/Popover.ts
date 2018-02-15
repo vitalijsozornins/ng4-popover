@@ -151,7 +151,11 @@ export class Popover implements OnChanges {
                 .rootNodes[0] as HTMLElement;
 
                 // Append DOM element to the body
-                document.getElementsByTagName('app')[0].appendChild(domElem);
+                if (document.getElementsByTagName("app").length > 0) {
+                    document.getElementsByTagName("app")[0].appendChild(domElem);
+                } else {
+                    document.getElementsByTagName("app-root")[0].appendChild(domElem);
+                }
             }
             // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
             if (this.popoverDismissTimeout > 0)
