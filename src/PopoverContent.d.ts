@@ -14,7 +14,7 @@ export declare class PopoverContent implements AfterViewInit, OnDestroy {
     closeOnMouseOutside: boolean;
     popoverDiv: ElementRef;
     popover: Popover;
-    onCloseFromOutside: EventEmitter<{}>;
+    onCloseFromOutside: EventEmitter<any>;
     top: number;
     left: number;
     isIn: boolean;

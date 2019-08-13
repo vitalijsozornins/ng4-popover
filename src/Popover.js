@@ -1,4 +1,13 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var PopoverContent_1 = require("./PopoverContent");
@@ -24,11 +33,7 @@ var Popover = /** @class */ (function () {
     // -------------------------------------------------------------------------
     // Event listeners
     // -------------------------------------------------------------------------
-    Popover.prototype.showOrHideOnClick = 
-    // -------------------------------------------------------------------------
-    // Event listeners
-    // -------------------------------------------------------------------------
-    function () {
+    Popover.prototype.showOrHideOnClick = function () {
         if (this.popoverOnHover)
             return;
         if (this.popoverDisabled)
@@ -61,14 +66,7 @@ var Popover = /** @class */ (function () {
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
-    // -------------------------------------------------------------------------
-    // Public Methods
-    // -------------------------------------------------------------------------
-    Popover.prototype.toggle = 
-    // -------------------------------------------------------------------------
-    // Public Methods
-    // -------------------------------------------------------------------------
-    function () {
+    Popover.prototype.toggle = function () {
         if (!this.visible) {
             this.show();
         }
@@ -158,36 +156,84 @@ var Popover = /** @class */ (function () {
     Popover.prototype.getElement = function () {
         return this.viewContainerRef.element.nativeElement;
     };
-    Popover.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: "[popover]",
-                    exportAs: "popover"
-                },] },
-    ];
-    /** @nocollapse */
-    Popover.ctorParameters = function () { return [
-        { type: core_1.ViewContainerRef, },
-        { type: core_1.ComponentFactoryResolver, },
-        { type: core_1.ApplicationRef, },
-        { type: core_1.Injector, },
-    ]; };
-    Popover.propDecorators = {
-        "content": [{ type: core_1.Input, args: ["popover",] },],
-        "popoverInBody": [{ type: core_1.Input },],
-        "popoverDisabled": [{ type: core_1.Input },],
-        "popoverAnimation": [{ type: core_1.Input },],
-        "popoverPlacement": [{ type: core_1.Input },],
-        "popoverTitle": [{ type: core_1.Input },],
-        "popoverOnHover": [{ type: core_1.Input },],
-        "popoverCloseOnClickOutside": [{ type: core_1.Input },],
-        "popoverCloseOnMouseOutside": [{ type: core_1.Input },],
-        "popoverDismissTimeout": [{ type: core_1.Input },],
-        "onShown": [{ type: core_1.Output },],
-        "onHidden": [{ type: core_1.Output },],
-        "showOrHideOnClick": [{ type: core_1.HostListener, args: ["click",] },],
-        "showOnHover": [{ type: core_1.HostListener, args: ["focusin",] }, { type: core_1.HostListener, args: ["mouseenter",] },],
-        "hideOnHover": [{ type: core_1.HostListener, args: ["focusout",] }, { type: core_1.HostListener, args: ["mouseleave",] },],
-    };
+    __decorate([
+        core_1.Input("popover"),
+        __metadata("design:type", Object)
+    ], Popover.prototype, "content", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], Popover.prototype, "popoverInBody", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], Popover.prototype, "popoverDisabled", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], Popover.prototype, "popoverAnimation", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], Popover.prototype, "popoverPlacement", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], Popover.prototype, "popoverTitle", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], Popover.prototype, "popoverOnHover", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], Popover.prototype, "popoverCloseOnClickOutside", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], Popover.prototype, "popoverCloseOnMouseOutside", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number)
+    ], Popover.prototype, "popoverDismissTimeout", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], Popover.prototype, "onShown", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], Popover.prototype, "onHidden", void 0);
+    __decorate([
+        core_1.HostListener("click"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], Popover.prototype, "showOrHideOnClick", null);
+    __decorate([
+        core_1.HostListener("focusin"),
+        core_1.HostListener("mouseenter"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], Popover.prototype, "showOnHover", null);
+    __decorate([
+        core_1.HostListener("focusout"),
+        core_1.HostListener("mouseleave"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], Popover.prototype, "hideOnHover", null);
+    Popover = __decorate([
+        core_1.Directive({
+            selector: "[popover]",
+            exportAs: "popover"
+        }),
+        __metadata("design:paramtypes", [core_1.ViewContainerRef,
+            core_1.ComponentFactoryResolver,
+            core_1.ApplicationRef,
+            core_1.Injector])
+    ], Popover);
     return Popover;
 }());
 exports.Popover = Popover;
