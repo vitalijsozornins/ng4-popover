@@ -1,11 +1,12 @@
-import { AfterViewInit, ElementRef, ChangeDetectorRef, OnDestroy, EventEmitter, Renderer } from "@angular/core";
+import { AfterViewInit, ElementRef, ChangeDetectorRef, OnDestroy, EventEmitter, Renderer2 } from "@angular/core";
 import { Popover } from "./Popover";
 export declare class PopoverContent implements AfterViewInit, OnDestroy {
     protected element: ElementRef;
     protected cdr: ChangeDetectorRef;
-    protected renderer: Renderer;
+    protected renderer: Renderer2;
     content: string;
     inBody: string;
+    popoverInBody: boolean;
     placement: "top" | "bottom" | "left" | "right" | "auto" | "auto top" | "auto bottom" | "auto left" | "auto right";
     title: string;
     animation: boolean;
@@ -23,7 +24,7 @@ export declare class PopoverContent implements AfterViewInit, OnDestroy {
      * Closes dropdown if user clicks outside of this directive.
      */
     onDocumentMouseDown: (event: any) => void;
-    constructor(element: ElementRef, cdr: ChangeDetectorRef, renderer: Renderer);
+    constructor(element: ElementRef, cdr: ChangeDetectorRef, renderer: Renderer2);
     listenClickFunc: any;
     listenMouseFunc: any;
     ngAfterViewInit(): void;

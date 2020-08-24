@@ -24,13 +24,14 @@ var PopoverContent = /** @class */ (function () {
         // Anonymous
         // -------------------------------------------------------------------------
         /**
-             * Closes dropdown if user clicks outside of this directive.
-             */
+           * Closes dropdown if user clicks outside of this directive.
+           */
         this.onDocumentMouseDown = function (event) {
             var element = _this.element.nativeElement;
             if (!element || !_this.popover)
                 return;
-            if (element.contains(event.target) || _this.popover.getElement().contains(event.target))
+            if (element.contains(event.target) ||
+                _this.popover.getElement().contains(event.target))
                 return;
             _this.hide();
             _this.onCloseFromOutside.emit(undefined);
@@ -39,9 +40,9 @@ var PopoverContent = /** @class */ (function () {
     PopoverContent.prototype.ngAfterViewInit = function () {
         var _this = this;
         if (this.closeOnClickOutside)
-            this.listenClickFunc = this.renderer.listenGlobal("document", "mousedown", function (event) { return _this.onDocumentMouseDown(event); });
+            this.listenClickFunc = this.renderer.listen("document", "mousedown", function (event) { return _this.onDocumentMouseDown(event); });
         if (this.closeOnMouseOutside)
-            this.listenMouseFunc = this.renderer.listenGlobal("document", "mouseover", function (event) { return _this.onDocumentMouseDown(event); });
+            this.listenMouseFunc = this.renderer.listen("document", "mouseover", function (event) { return _this.onDocumentMouseDown(event); });
         this.show();
         this.cdr.detectChanges();
     };
@@ -109,7 +110,7 @@ var PopoverContent = /** @class */ (function () {
             },
             right: function () {
                 return hostElPos.left + hostElPos.width;
-            }
+            },
         };
         var shiftHeight = {
             center: function () {
@@ -120,32 +121,32 @@ var PopoverContent = /** @class */ (function () {
             },
             bottom: function () {
                 return hostElPos.top + hostElPos.height;
-            }
+            },
         };
         var targetElPos;
         switch (pos0) {
             case "right":
                 targetElPos = {
                     top: shiftHeight[pos1](),
-                    left: shiftWidth[pos0]()
+                    left: shiftWidth[pos0](),
                 };
                 break;
             case "left":
                 targetElPos = {
                     top: shiftHeight[pos1](),
-                    left: hostElPos.left - targetElWidth
+                    left: hostElPos.left - targetElWidth,
                 };
                 break;
             case "bottom":
                 targetElPos = {
                     top: shiftHeight[pos0](),
-                    left: shiftWidth[pos1]()
+                    left: shiftWidth[pos1](),
                 };
                 break;
             default:
                 targetElPos = {
                     top: hostElPos.top - targetElHeight,
-                    left: shiftWidth[pos1]()
+                    left: shiftWidth[pos1](),
                 };
                 break;
         }
@@ -157,15 +158,17 @@ var PopoverContent = /** @class */ (function () {
         var offsetParentEl = this.parentOffsetEl(nativeEl);
         if (offsetParentEl !== window.document && !this.popover.popoverInBody) {
             offsetParentBCR = this.offset(offsetParentEl);
-            offsetParentBCR.top += offsetParentEl.clientTop - offsetParentEl.scrollTop;
-            offsetParentBCR.left += offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
+            offsetParentBCR.top +=
+                offsetParentEl.clientTop - offsetParentEl.scrollTop;
+            offsetParentBCR.left +=
+                offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
         }
         var boundingClientRect = nativeEl.getBoundingClientRect();
         return {
             width: boundingClientRect.width || nativeEl.offsetWidth,
             height: boundingClientRect.height || nativeEl.offsetHeight,
             top: elBCR.top - offsetParentBCR.top,
-            left: elBCR.left - offsetParentBCR.left
+            left: elBCR.left - offsetParentBCR.left,
         };
     };
     PopoverContent.prototype.offset = function (nativeEl) {
@@ -173,8 +176,10 @@ var PopoverContent = /** @class */ (function () {
         return {
             width: boundingClientRect.width || nativeEl.offsetWidth,
             height: boundingClientRect.height || nativeEl.offsetHeight,
-            top: boundingClientRect.top + (window.pageYOffset || window.document.documentElement.scrollTop),
-            left: boundingClientRect.left + (window.pageXOffset || window.document.documentElement.scrollLeft)
+            top: boundingClientRect.top +
+                (window.pageYOffset || window.document.documentElement.scrollTop),
+            left: boundingClientRect.left +
+                (window.pageXOffset || window.document.documentElement.scrollLeft),
         };
     };
     PopoverContent.prototype.getStyle = function (nativeEl, cssProp) {
@@ -191,7 +196,9 @@ var PopoverContent = /** @class */ (function () {
     };
     PopoverContent.prototype.parentOffsetEl = function (nativeEl) {
         var offsetParent = nativeEl.offsetParent || window.document;
-        while (offsetParent && offsetParent !== window.document && this.isStaticPositioned(offsetParent)) {
+        while (offsetParent &&
+            offsetParent !== window.document &&
+            this.isStaticPositioned(offsetParent)) {
             offsetParent = offsetParent.offsetParent;
         }
         return offsetParent || window.document;
@@ -203,16 +210,21 @@ var PopoverContent = /** @class */ (function () {
         }
         var hostElBoundingRect = hostElement.getBoundingClientRect();
         var desiredPlacement = placementParts[1] || "bottom";
-        if (desiredPlacement === "top" && hostElBoundingRect.top - targetElement.offsetHeight < 0) {
+        if (desiredPlacement === "top" &&
+            hostElBoundingRect.top - targetElement.offsetHeight < 0) {
             return "bottom";
         }
-        if (desiredPlacement === "bottom" && hostElBoundingRect.bottom + targetElement.offsetHeight > window.innerHeight) {
+        if (desiredPlacement === "bottom" &&
+            hostElBoundingRect.bottom + targetElement.offsetHeight >
+                window.innerHeight) {
             return "top";
         }
-        if (desiredPlacement === "left" && hostElBoundingRect.left - targetElement.offsetWidth < 0) {
+        if (desiredPlacement === "left" &&
+            hostElBoundingRect.left - targetElement.offsetWidth < 0) {
             return "right";
         }
-        if (desiredPlacement === "right" && hostElBoundingRect.right + targetElement.offsetWidth > window.innerWidth) {
+        if (desiredPlacement === "right" &&
+            hostElBoundingRect.right + targetElement.offsetWidth > window.innerWidth) {
             return "left";
         }
         return desiredPlacement;
@@ -220,15 +232,17 @@ var PopoverContent = /** @class */ (function () {
     PopoverContent.decorators = [
         { type: core_1.Component, args: [{
                     selector: "popover-content",
-                    template: "\n<div #popoverDiv class=\"popover {{ effectivePlacement }}\"\n     [style.top]=\"top + 'px'\"\n     [style.left]=\"left + 'px'\"\n     [class.in]=\"isIn\"\n     [class.fade]=\"animation\"\n     style=\"display: block\"\n     role=\"popover\">\n    <div [hidden]=\"!closeOnMouseOutside\" class=\"virtual-area\"></div>\n    <div class=\"arrow\"></div>\n    <h3 class=\"popover-title\" [hidden]=\"!title\">{{ title }}</h3>\n    <div class=\"popover-content\">\n        <ng-content></ng-content>\n        <div [innerHtml]=\"content\"></div>\n    </div>\n</div>\n",
-                    styles: ["\n.popover .virtual-area {\n    height: 11px;\n    width: 100%;\n    position: absolute;\n}\n.popover.top .virtual-area {\n    bottom: -11px;\n}\n.popover.bottom .virtual-area {\n    top: -11px;\n}\n.popover.left .virtual-area {\n    right: -11px;\n}\n.popover.right .virtual-area {\n    left: -11px;\n}\n"]
+                    template: "\n    <div\n      #popoverDiv\n      class=\"popover {{ effectivePlacement }}\"\n      [style.top]=\"top + 'px'\"\n      [style.left]=\"left + 'px'\"\n      [class.in]=\"isIn\"\n      [class.fade]=\"animation\"\n      style=\"display: block\"\n      role=\"popover\"\n    >\n      <div [hidden]=\"!closeOnMouseOutside\" class=\"virtual-area\"></div>\n      <div class=\"arrow\"></div>\n      <h3 class=\"popover-title\" [hidden]=\"!title\">{{ title }}</h3>\n      <div class=\"popover-content\">\n        <ng-content></ng-content>\n        <div [innerHtml]=\"content\"></div>\n      </div>\n    </div>\n  ",
+                    styles: [
+                        "\n      .popover .virtual-area {\n        height: 11px;\n        width: 100%;\n        position: absolute;\n      }\n      .popover.top .virtual-area {\n        bottom: -11px;\n      }\n      .popover.bottom .virtual-area {\n        top: -11px;\n      }\n      .popover.left .virtual-area {\n        right: -11px;\n      }\n      .popover.right .virtual-area {\n        left: -11px;\n      }\n    ",
+                    ],
                 },] },
     ];
     /** @nocollapse */
     PopoverContent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     PopoverContent.propDecorators = {
         "content": [{ type: core_1.Input },],
