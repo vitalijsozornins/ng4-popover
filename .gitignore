@@ -1,6 +1,7 @@
 typings/
 build/
 node_modules/
+dist/out-tsc/node_modules/
 **/*.ngfactory.ts
 .vscode
 npm-debug.log
